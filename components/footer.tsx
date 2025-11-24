@@ -9,7 +9,7 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <GraduationCap className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold">LearnHub</span>
+              <span className="text-xl font-bold">Thryvez</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4 max-w-sm">
               Empowering learners worldwide with quality education. Learn new skills, advance your career, and achieve your goals.
@@ -70,7 +70,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} LearnHub. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Thryvez. All rights reserved.</p>
         </div>
       </div>
     </footer>
