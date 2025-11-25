@@ -2,12 +2,12 @@ import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { HeroSection } from '@/components/hero-section';
 import { FeaturedCourses } from '@/components/featured-courses';
-import { Categories } from '@/components/categories';
 import { HowItWorks } from '@/components/how-it-works';
 import { Statistics } from '@/components/statistics';
 import { Testimonials } from '@/components/testimonials';
 import { Instructors } from '@/components/instructors';
 import { Newsletter } from '@/components/newsletter';
+import { ModernLearner } from '@/components/modern-learner';
 
 export default function Home() {
   return (
@@ -15,10 +15,10 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <HeroSection />
-        <Categories />
+        <Statistics />
+        <ModernLearner />
         <FeaturedCourses />
         <HowItWorks />
-        <Statistics />
         <Instructors />
         <Testimonials />
         <Newsletter />

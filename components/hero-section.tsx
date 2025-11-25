@@ -29,20 +29,6 @@ export function HeroSection() {
               Join thousands of students learning from industry experts. Master in-demand skills and advance your career with our comprehensive courses.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="What do you want to learn?"
-                  className="pl-12 h-12 text-base"
-                />
-              </div>
-              <Button size="lg" className="h-12 px-8 gap-2 whitespace-nowrap">
-                Get Started <ArrowRight className="h-5 w-5" />
-              </Button>
-            </div>
-
             <div className="flex items-center gap-8 pt-4">
               <div>
                 <div className="text-3xl font-bold">10K+</div>
