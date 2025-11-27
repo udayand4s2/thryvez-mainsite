@@ -6,23 +6,19 @@ import { Statistics } from '@/components/statistics';
 import { Testimonials } from '@/components/testimonials';
 import { Newsletter } from '@/components/newsletter';
 import { ModernLearner } from '@/components/modern-learner';
-import { SectionDivider } from '@/components/section-divider';
+import { FAQ } from '@/components/faq';
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col scroll-smooth">
+    <div className="min-h-screen flex flex-col bg-black">
       <Header />
       <main className="flex-1">
         <HeroSection />
-        <SectionDivider />
         <Statistics />
-        <SectionDivider />
         <ModernLearner />
-        <SectionDivider />
         <FeaturedCourses />
-        <SectionDivider />
         <Testimonials />
-        <SectionDivider />
+        <FAQ />
         <Newsletter />
       </main>
       <Footer />

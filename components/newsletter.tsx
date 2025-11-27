@@ -2,50 +2,36 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Mail, CheckCircle } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export function Newsletter() {
   return (
-    <section className="py-20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent">
+    <section className="py-16 sm:py-20 lg:py-24 bg-black border-t border-white/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-primary/10 flex items-center justify-center">
-            <Mail className="h-8 w-8 text-primary" />
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Stay Updated with Our Newsletter
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Ready to accelerate your growth?
           </h2>
-          <p className="text-muted-foreground mb-8">
-            Get the latest courses, updates, and special offers delivered to your inbox
+          <p className="text-white/60 text-lg mb-10 max-w-xl mx-auto">
+            Join our newsletter for exclusive insights, early access to courses, and community updates.
           </p>
 
           <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8">
             <Input
               type="email"
               placeholder="Enter your email"
-              className="h-12"
+              className="h-14 bg-white/5 border-white/10 text-white placeholder:text-white/40 focus:border-white/30"
               required
             />
-            <Button size="lg" className="h-12 px-8 whitespace-nowrap">
+            <Button size="lg" className="h-14 px-8 bg-white text-black hover:bg-white/90 font-semibold whitespace-nowrap group">
               Subscribe
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </form>
 
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-primary" />
-              <span>Weekly course updates</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-primary" />
-              <span>Exclusive discounts</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-primary" />
-              <span>Learning tips & tricks</span>
-            </div>
-          </div>
+          <p className="text-sm text-white/40">
+            No spam, unsubscribe anytime. Join 10,000+ subscribers.
+          </p>
         </div>
       </div>
     </section>
