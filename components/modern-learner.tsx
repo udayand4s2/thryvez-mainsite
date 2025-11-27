@@ -2,238 +2,265 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 export function ModernLearner() {
+  const [isVisible1, setIsVisible1] = useState(false);
+  const [isVisible2, setIsVisible2] = useState(false);
+  const section1Ref = useRef<HTMLDivElement>(null);
+  const section2Ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer1 = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible1(true);
+      },
+      { threshold: 0.2 }
+    );
+
+    const observer2 = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible2(true);
+      },
+      { threshold: 0.2 }
+    );
+
+    if (section1Ref.current) observer1.observe(section1Ref.current);
+    if (section2Ref.current) observer2.observe(section2Ref.current);
+
+    return () => {
+      observer1.disconnect();
+      observer2.disconnect();
+    };
+  }, []);
+
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="py-12 sm:py-16 lg:py-20 bg-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">
+        <div ref={section1Ref} className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className={`space-y-4 sm:space-y-6 text-center lg:text-left transition-all duration-700 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
               Made for the
               <span className="block">modern learner</span>
             </h2>
             
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0">
               You're serious about education. We're serious about engaging your students and turning them into loyal customers.
             </p>
 
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-base">Innovative student dashboard</span>
+            <div className="space-y-2 sm:space-y-3 inline-block text-left">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-0.5 flex-shrink-0" />
+                <span className="text-sm sm:text-base">Innovative student dashboard</span>
               </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-base">Highly-rated mobile app</span>
+              <div className="flex items-start gap-2 sm:gap-3">
+                <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-0.5 flex-shrink-0" />
+                <span className="text-sm sm:text-base">Highly-rated mobile app</span>
               </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-base">Drip content</span>
+              <div className="flex items-start gap-2 sm:gap-3">
+                <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-0.5 flex-shrink-0" />
+                <span className="text-sm sm:text-base">Drip content</span>
               </div>
             </div>
           </div>
 
-          <div className="relative flex items-center justify-center gap-6">
-            <div className="relative z-10 transform -rotate-6">
-              <Card className="w-64 shadow-2xl border-8 border-background">
-                <CardContent className="p-0">
-                  <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-t-lg px-4 py-3 flex items-center justify-center gap-2">
-                    <div className="w-16 h-4 bg-slate-950 rounded-full"></div>
-                  </div>
-                  <div className="p-6 bg-white space-y-4">
-                    <div className="text-center">
-                      <h3 className="font-semibold text-slate-900 mb-2">Test your knowledge</h3>
-                      <p className="text-xs text-slate-600">Question 9/16</p>
+          <div className={`relative flex items-center justify-center transition-all duration-700 delay-200 ${isVisible1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full">
+              <div className="relative z-10 transform sm:-rotate-6 w-full max-w-[240px] sm:max-w-[256px]">
+                <Card className="shadow-2xl border-4 sm:border-8 border-background">
+                  <CardContent className="p-0">
+                    <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-t-lg px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-center gap-2">
+                      <div className="w-12 sm:w-16 h-3 sm:h-4 bg-slate-950 rounded-full"></div>
                     </div>
+                    <div className="p-4 sm:p-6 bg-white space-y-3 sm:space-y-4">
+                      <div className="text-center">
+                        <h3 className="font-semibold text-slate-900 text-sm sm:text-base mb-1 sm:mb-2">Test your knowledge</h3>
+                        <p className="text-xs text-slate-600">Question 9/16</p>
+                      </div>
+                      
+                      <div className="w-full h-1.5 sm:h-2 bg-slate-200 rounded-full overflow-hidden">
+                        <div className="w-3/4 h-full bg-primary"></div>
+                      </div>
+
+                      <div className="aspect-video bg-gradient-to-br from-emerald-800 to-emerald-900 rounded-lg flex items-center justify-center relative">
+                        <div className="text-4xl sm:text-6xl">🧠</div>
+                        <div className="absolute bottom-1 sm:bottom-2 right-1 sm:right-2 bg-white px-2 sm:px-3 py-0.5 sm:py-1 rounded-md">
+                          <span className="text-xs sm:text-sm font-bold text-slate-900">83%</span>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5 sm:space-y-2">
+                        <p className="text-xs text-slate-600 hidden sm:block">You need to analyze feedback. Which AI tool category would be most suitable?</p>
+                        <div className="space-y-1 sm:space-y-1.5">
+                          <div className="bg-slate-100 text-slate-700 text-xs py-1.5 sm:py-2 px-2 sm:px-3 rounded">Predictive Analytics</div>
+                          <div className="bg-slate-100 text-slate-700 text-xs py-1.5 sm:py-2 px-2 sm:px-3 rounded">Business Intelligence</div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="relative z-20 sm:transform sm:translate-y-8 w-full max-w-[280px] sm:max-w-[320px] hidden md:block">
+                <Card className="shadow-2xl">
+                  <CardContent className="p-4 sm:p-6 bg-white space-y-3 sm:space-y-4">
+                    <h3 className="font-semibold text-slate-900 text-sm sm:text-base">Quiz scores</h3>
                     
-                    <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
-                      <div className="w-3/4 h-full bg-primary"></div>
-                    </div>
+                    <div className="space-y-2 sm:space-y-3">
+                      <div className="flex items-center justify-between text-xs sm:text-sm">
+                        <div className="flex items-center gap-2 sm:gap-4">
+                          <span className="text-slate-600 w-20 sm:w-32">LESSON NAME</span>
+                          <span className="text-slate-600 w-10 sm:w-16">AVG</span>
+                        </div>
+                        <span className="text-slate-600 w-12 sm:w-20">DONE</span>
+                      </div>
+                      
+                      <div className="flex items-center justify-between py-1.5 sm:py-2 border-b">
+                        <div className="flex items-center gap-2 sm:gap-4">
+                          <span className="text-slate-900 w-20 sm:w-32 text-xs sm:text-sm">Tool Categories</span>
+                          <span className="text-slate-900 w-10 sm:w-16 text-xs sm:text-sm">72%</span>
+                        </div>
+                        <span className="text-slate-900 w-12 sm:w-20 text-xs sm:text-sm">42</span>
+                      </div>
 
-                    <div className="aspect-video bg-gradient-to-br from-emerald-800 to-emerald-900 rounded-lg flex items-center justify-center relative">
-                      <div className="text-6xl">🧠</div>
-                      <div className="absolute bottom-2 right-2 bg-white px-3 py-1 rounded-md">
-                        <span className="text-sm font-bold text-slate-900">83%</span>
+                      <div className="flex items-center justify-between py-1.5 sm:py-2 border-b">
+                        <div className="flex items-center gap-2 sm:gap-4">
+                          <span className="text-slate-900 w-20 sm:w-32 text-xs sm:text-sm">Text Analysis</span>
+                          <span className="text-slate-900 w-10 sm:w-16 text-xs sm:text-sm">53%</span>
+                        </div>
+                        <span className="text-slate-900 w-12 sm:w-20 text-xs sm:text-sm">36</span>
                       </div>
-                    </div>
 
-                    <div className="space-y-2">
-                      <p className="text-xs text-slate-600">You need to analyze feedback. Which AI tool category would be most suitable?</p>
-                      <div className="space-y-1.5">
-                        <div className="bg-slate-100 text-slate-700 text-xs py-2 px-3 rounded">Predictive Analytics Software</div>
-                        <div className="bg-slate-100 text-slate-700 text-xs py-2 px-3 rounded">Business Intelligence Dashboard</div>
+                      <div className="flex items-center justify-between py-1.5 sm:py-2">
+                        <div className="flex items-center gap-2 sm:gap-4">
+                          <span className="text-slate-900 w-20 sm:w-32 text-xs sm:text-sm">Review Systems</span>
+                          <span className="text-slate-900 w-10 sm:w-16 text-xs sm:text-sm">83%</span>
+                        </div>
+                        <span className="text-slate-900 w-12 sm:w-20 text-xs sm:text-sm">27</span>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="relative z-20 transform translate-y-8">
-              <Card className="w-80 shadow-2xl">
-                <CardContent className="p-6 bg-white space-y-4">
-                  <h3 className="font-semibold text-slate-900">Quiz scores</h3>
-                  
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center gap-4">
-                        <span className="text-slate-600 w-32">LESSON NAME</span>
-                        <span className="text-slate-600 w-16">AVG</span>
-                      </div>
-                      <span className="text-slate-600 w-20">COMPLETED</span>
-                    </div>
-                    
-                    <div className="flex items-center justify-between py-2 border-b">
-                      <div className="flex items-center gap-4">
-                        <span className="text-slate-900 w-32 text-sm">Tool Categories</span>
-                        <span className="text-slate-900 w-16 text-sm">72%</span>
-                      </div>
-                      <span className="text-slate-900 w-20 text-sm">42</span>
-                    </div>
-
-                    <div className="flex items-center justify-between py-2 border-b">
-                      <div className="flex items-center gap-4">
-                        <span className="text-slate-900 w-32 text-sm">Text Analysis</span>
-                        <span className="text-slate-900 w-16 text-sm">53%</span>
-                      </div>
-                      <span className="text-slate-900 w-20 text-sm">36</span>
-                    </div>
-
-                    <div className="flex items-center justify-between py-2">
-                      <div className="flex items-center gap-4">
-                        <span className="text-slate-900 w-32 text-sm">Review Systems</span>
-                        <span className="text-slate-900 w-16 text-sm">83%</span>
-                      </div>
-                      <span className="text-slate-900 w-20 text-sm">27</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center mt-24">
-          <div className="order-2 lg:order-1 relative flex items-center justify-center gap-6">
-            <div className="relative z-10">
-              <Card className="w-80 shadow-2xl overflow-hidden">
-                <CardContent className="p-0">
-                  <div className="bg-gradient-to-br from-blue-900 to-blue-800 p-6 space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="space-y-1">
-                        <div className="w-24 h-3 bg-white/90 rounded"></div>
-                        <div className="w-16 h-2 bg-white/70 rounded"></div>
+        <div ref={section2Ref} className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center mt-16 sm:mt-20 lg:mt-24">
+          <div className={`order-2 lg:order-1 relative flex items-center justify-center transition-all duration-700 delay-200 ${isVisible2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full">
+              <div className="relative z-10 w-full max-w-[280px] sm:max-w-[320px]">
+                <Card className="shadow-2xl overflow-hidden">
+                  <CardContent className="p-0">
+                    <div className="bg-gradient-to-br from-blue-900 to-blue-800 p-4 sm:p-6 space-y-3 sm:space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="space-y-1">
+                          <div className="w-20 sm:w-24 h-2 sm:h-3 bg-white/90 rounded"></div>
+                          <div className="w-14 sm:w-16 h-1.5 sm:h-2 bg-white/70 rounded"></div>
+                        </div>
+                        <div className="flex gap-1.5 sm:gap-2">
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white/20 rounded"></div>
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white/20 rounded"></div>
+                        </div>
                       </div>
-                      <div className="flex gap-2">
-                        <div className="w-8 h-8 bg-white/20 rounded"></div>
-                        <div className="w-8 h-8 bg-white/20 rounded"></div>
+
+                      <div className="bg-white rounded-lg p-1">
+                        <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                          <div className="w-5 h-5 sm:w-6 sm:h-6 bg-slate-200 rounded"></div>
+                          <div className="flex-1 h-2 sm:h-3 bg-slate-200 rounded"></div>
+                        </div>
+                        <div className="aspect-video bg-gradient-to-br from-rose-500 to-orange-500 rounded relative overflow-hidden">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="text-white text-3xl sm:text-4xl">💪</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5 sm:space-y-2">
+                        <div className="bg-white/20 rounded-lg p-2 sm:p-3">
+                          <div className="w-24 sm:w-32 h-2 sm:h-3 bg-white/90 rounded mb-0.5 sm:mb-1"></div>
+                          <div className="w-20 sm:w-24 h-1.5 sm:h-2 bg-white/70 rounded"></div>
+                        </div>
                       </div>
                     </div>
+                  </CardContent>
+                </Card>
+              </div>
 
-                    <div className="bg-white rounded-lg p-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-6 h-6 bg-slate-200 rounded"></div>
-                        <div className="flex-1 h-3 bg-slate-200 rounded"></div>
-                      </div>
-                      <div className="aspect-video bg-gradient-to-br from-rose-500 to-orange-500 rounded relative overflow-hidden">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-white text-4xl">💪</div>
+              <div className="relative z-20 sm:transform sm:-translate-y-8 w-full max-w-[260px] sm:max-w-[288px] hidden md:block">
+                <Card className="shadow-2xl">
+                  <CardContent className="p-4 sm:p-6 bg-white space-y-3 sm:space-y-4">
+                    <div className="border-b pb-3 sm:pb-4">
+                      <h3 className="font-semibold text-slate-900 text-sm sm:text-base mb-0.5 sm:mb-1">Add content</h3>
+                    </div>
+                    
+                    <div>
+                      <p className="text-xs text-slate-600 mb-2 sm:mb-3 uppercase tracking-wide">CONTENT</p>
+                      <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
+                        <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
+                          <div className="text-lg sm:text-2xl">📝</div>
+                        </div>
+                        <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
+                          <div className="text-lg sm:text-2xl">🎥</div>
+                        </div>
+                        <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
+                          <div className="text-lg sm:text-2xl">📄</div>
+                        </div>
+                        <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
+                          <div className="text-lg sm:text-2xl">🔊</div>
+                        </div>
+                        <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
+                          <div className="text-lg sm:text-2xl">🖼️</div>
+                        </div>
+                        <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
+                          <div className="text-lg sm:text-2xl">📎</div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <div className="bg-white/20 rounded-lg p-3">
-                        <div className="w-32 h-3 bg-white/90 rounded mb-1"></div>
-                        <div className="w-24 h-2 bg-white/70 rounded"></div>
+                    <div>
+                      <p className="text-xs text-slate-600 mb-2 sm:mb-3 uppercase tracking-wide">TOOLS</p>
+                      <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                        <div className="aspect-video bg-slate-100 rounded"></div>
+                        <div className="aspect-video bg-slate-100 rounded"></div>
                       </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="relative z-20 transform -translate-y-8">
-              <Card className="w-72 shadow-2xl">
-                <CardContent className="p-6 bg-white space-y-4">
-                  <div className="border-b pb-4">
-                    <h3 className="font-semibold text-slate-900 mb-1">Add content</h3>
-                  </div>
-                  
-                  <div>
-                    <p className="text-xs text-slate-600 mb-3 uppercase tracking-wide">CONTENT</p>
-                    <div className="grid grid-cols-3 gap-2">
-                      <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
-                        <div className="text-2xl">📝</div>
-                      </div>
-                      <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
-                        <div className="text-2xl">🎥</div>
-                      </div>
-                      <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
-                        <div className="text-2xl">📄</div>
-                      </div>
-                      <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
-                        <div className="text-2xl">🔊</div>
-                      </div>
-                      <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
-                        <div className="text-2xl">🖼️</div>
-                      </div>
-                      <div className="aspect-square bg-slate-100 rounded flex items-center justify-center">
-                        <div className="text-2xl">📎</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="text-xs text-slate-600 mb-3 uppercase tracking-wide">EDUCATIONAL TOOLS</p>
-                    <div className="grid grid-cols-2 gap-2">
-                      <div className="aspect-video bg-slate-100 rounded"></div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p className="text-xs text-slate-600 mb-3 uppercase tracking-wide">MARKETING TOOLS</p>
-                    <div className="grid grid-cols-2 gap-2">
-                      <div className="aspect-video bg-slate-100 rounded"></div>
-                      <div className="aspect-video bg-slate-100 rounded"></div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
 
-          <div className="order-1 lg:order-2 space-y-6">
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">
+          <div className={`order-1 lg:order-2 space-y-4 sm:space-y-6 text-center lg:text-left transition-all duration-700 ${isVisible2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
               More time for
               <span className="block">what matters</span>
             </h2>
             
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-lg mx-auto lg:mx-0">
               We automate the operational headaches so you can keep growing your business without adding busywork.
             </p>
 
-            <div className="space-y-3">
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-base">Drag-and-drop course builders</span>
+            <div className="space-y-2 sm:space-y-3 inline-block text-left">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-0.5 flex-shrink-0" />
+                <span className="text-sm sm:text-base">Drag-and-drop course builders</span>
               </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-base">Built-in AI creation and translation tools</span>
+              <div className="flex items-start gap-2 sm:gap-3">
+                <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-0.5 flex-shrink-0" />
+                <span className="text-sm sm:text-base">Built-in AI creation and translation tools</span>
               </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-base">Sales and VAT tax handling</span>
+              <div className="flex items-start gap-2 sm:gap-3">
+                <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-0.5 flex-shrink-0" />
+                <span className="text-sm sm:text-base">Sales and VAT tax handling</span>
               </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-base">Tax filing and affiliate payouts</span>
+              <div className="flex items-start gap-2 sm:gap-3">
+                <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-0.5 flex-shrink-0" />
+                <span className="text-sm sm:text-base">Tax filing and affiliate payouts</span>
               </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
-                <span className="text-base">Assisted migration and custom support</span>
+              <div className="flex items-start gap-2 sm:gap-3">
+                <CheckCircle className="h-5 w-5 sm:h-6 sm:w-6 text-primary mt-0.5 flex-shrink-0" />
+                <span className="text-sm sm:text-base">Assisted migration and custom support</span>
               </div>
             </div>
           </div>
