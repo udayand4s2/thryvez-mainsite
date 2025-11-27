@@ -18,7 +18,8 @@ const courseCategories = [
     courses: [
       {
         id: 1,
-        title: 'Brand Strategy Fundamentals',
+        title: 'CRAFT',
+        subtitle: 'Brand Strategy',
         instructor: 'Priya Sharma',
         role: 'Brand Director',
         company: 'Swiggy',
@@ -26,7 +27,8 @@ const courseCategories = [
       },
       {
         id: 2,
-        title: 'Performance Marketing',
+        title: 'CRAFT',
+        subtitle: 'Performance Marketing',
         instructor: 'Rahul Verma',
         role: 'Growth Lead',
         company: 'CRED',
@@ -34,7 +36,8 @@ const courseCategories = [
       },
       {
         id: 3,
-        title: 'Content That Converts',
+        title: 'CRAFT',
+        subtitle: 'Content Strategy',
         instructor: 'Ananya Gupta',
         role: 'Content Head',
         company: 'Razorpay',
@@ -49,7 +52,8 @@ const courseCategories = [
     courses: [
       {
         id: 4,
-        title: 'Product Strategy 101',
+        title: 'BUILD',
+        subtitle: 'Product Strategy',
         instructor: 'Vikram Singh',
         role: 'Product Lead',
         company: 'Google',
@@ -57,7 +61,8 @@ const courseCategories = [
       },
       {
         id: 5,
-        title: 'User Research Mastery',
+        title: 'BUILD',
+        subtitle: 'User Research',
         instructor: 'Meera Nair',
         role: 'UX Research',
         company: 'Microsoft',
@@ -65,7 +70,8 @@ const courseCategories = [
       },
       {
         id: 6,
-        title: 'Data-Driven PM',
+        title: 'BUILD',
+        subtitle: 'Data-Driven PM',
         instructor: 'Arjun Patel',
         role: 'Senior PM',
         company: 'Meta',
@@ -80,7 +86,8 @@ const courseCategories = [
     courses: [
       {
         id: 7,
-        title: 'Growth Hacking 101',
+        title: 'SCALE',
+        subtitle: 'Growth Hacking',
         instructor: 'Kiran Rao',
         role: 'Growth Head',
         company: 'Zerodha',
@@ -88,7 +95,8 @@ const courseCategories = [
       },
       {
         id: 8,
-        title: 'Startup Scaling',
+        title: 'SCALE',
+        subtitle: 'Startup Scaling',
         instructor: 'Neha Kulkarni',
         role: 'COO',
         company: 'Meesho',
@@ -96,7 +104,8 @@ const courseCategories = [
       },
       {
         id: 9,
-        title: 'GTM Strategy',
+        title: 'SCALE',
+        subtitle: 'GTM Strategy',
         instructor: 'Amit Joshi',
         role: 'VP Strategy',
         company: 'Flipkart',
@@ -150,7 +159,7 @@ export function CoursesContent() {
 
         {courseCategories.map((category, categoryIndex) => (
           <div key={category.tag} className="mb-20 lg:mb-28">
-            <div className={`mb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${200 + categoryIndex * 100}ms` }}>
+            <div className={`mb-10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${200 + categoryIndex * 100}ms` }}>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 mb-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                 <span className="text-xs text-white/60 uppercase tracking-wider">{category.tag}</span>
@@ -163,29 +172,32 @@ export function CoursesContent() {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {category.courses.map((course, index) => (
                 <div
                   key={course.id}
-                  className={`group relative rounded-2xl overflow-hidden bg-zinc-900 border border-white/5 hover:border-white/20 transition-all duration-500 cursor-pointer ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                  className={`group relative aspect-[3/4] rounded-xl overflow-hidden cursor-pointer transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                   style={{ transitionDelay: `${300 + categoryIndex * 100 + index * 50}ms` }}
                 >
-                  <div className="aspect-[4/5] relative overflow-hidden">
-                    <img
-                      src={course.image}
-                      alt={course.instructor}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                    
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <span className="text-xs text-white/50 uppercase tracking-wider mb-2 block">Course</span>
-                      <h3 className="font-semibold text-xl text-white mb-2 group-hover:text-white/90 transition-colors">
-                        {course.title}
-                      </h3>
-                      <div className="text-white/60 text-sm">
-                        <p className="font-medium text-white/80">{course.instructor}</p>
-                        <p>{course.role}, {course.company}</p>
+                  <img
+                    src={course.image}
+                    alt={course.instructor}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                  
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-1">
+                      {course.title}
+                    </div>
+                    <div className="text-white/70 text-sm mb-3">{course.subtitle}</div>
+                    <div className="flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        <span className="text-xs font-semibold text-white">{course.instructor.split(' ').map(n => n[0]).join('')}</span>
+                      </div>
+                      <div className="text-xs text-white/60">
+                        <span className="text-white/80">{course.instructor}</span>
+                        <span className="block">{course.company}</span>
                       </div>
                     </div>
                   </div>
